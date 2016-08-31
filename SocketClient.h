@@ -1,3 +1,4 @@
+#pragma once
 /**
  * SocketClient | Socket 双工长连接
  * 使用两个单独的线程分别监听消息发送队列和查收服务器消息，以便
