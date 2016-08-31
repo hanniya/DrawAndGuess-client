@@ -21,4 +21,5 @@ protected:
 public:
 	afx_msg void OnBnClickedExitButton();
 	afx_msg void OnBnClickedCreatButton();
+	afx_msg void OnBnClickedJoinRoom();
 };
