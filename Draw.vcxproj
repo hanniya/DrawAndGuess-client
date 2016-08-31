@@ -103,6 +103,7 @@
     <ClInclude Include="Draw.h" />
     <ClInclude Include="DrawDlg.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SocketClient.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utils.h" />
