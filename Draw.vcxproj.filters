@@ -68,6 +68,9 @@
     <ClCompile Include="JoinDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SocketClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Draw.rc">
