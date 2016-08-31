@@ -1,3 +1,6 @@
+#ifndef _SOCKET_CLIENT_H_
+#define _SOCKET_CLIENT_H_
+#pragma comment(lib, "WS2_32.lib")
 /**
  * SocketClient | Socket 双工长连接
  * 使用两个单独的线程分别监听消息发送队列和查收服务器消息，以便
@@ -17,12 +20,10 @@
  *    (char*)函数向服务器发送消息。
  **/
 
-#pragma comment(lib, "WS2_32.lib")
-#include <windows.h>
 #include <queue>
 using namespace std;
 
-queue<char*> messageQueue;
+extern queue<char*> messageQueue;
 
 // 消息最大长度设置
 #define BUFFER_LEN 1024
@@ -31,72 +32,15 @@ queue<char*> messageQueue;
 #define SERVER_IP "139.129.4.219"
 #define SERVER_PORT 8082
 
-SOCKET sockClient;
-bool looping = false;
+extern SOCKET sockClient;
+extern bool looping;
 
-DWORD WINAPI receiverThread (LPVOID lpParameter);
-DWORD WINAPI senderThread (LPVOID lpParameter);
+extern DWORD WINAPI receiverThread (LPVOID lpParameter);
+extern DWORD WINAPI senderThread (LPVOID lpParameter);
 
-void (*SC_onReceive)(char*) = NULL;
+extern void (*SC_onReceive)(char*);
+extern void SC_beginThreads ();
+extern void SC_endThreads ();
+extern void SC_sendMessage (char* message);
 
-void SC_beginThreads () {
-	WORD wVersionRequested;
-	WSADATA wsaData;
-	int err;
-
-	wVersionRequested = MAKEWORD (1, 1);
-
-	err = WSAStartup (wVersionRequested, &wsaData);
-	if (err != 0) {
-		return;
-	}
-
-	if (LOBYTE (wsaData.wVersion) != 1 ||
-		HIBYTE (wsaData.wVersion) != 1) {
-		WSACleanup ();
-		return;
-	}
-	sockClient = socket (AF_INET, SOCK_STREAM, 0);
-
-	SOCKADDR_IN addrSrv;
-	addrSrv.sin_addr.S_un.S_addr = inet_addr (SERVER_IP);
-	addrSrv.sin_family = AF_INET;
-	addrSrv.sin_port = htons (SERVER_PORT);
-	connect (sockClient, (SOCKADDR*)&addrSrv, sizeof (SOCKADDR));
-
-	HANDLE sendThread = CreateThread (NULL, 0, senderThread, NULL, 0, NULL);
-	CloseHandle (sendThread);
-
-	HANDLE recvThread = CreateThread (NULL, 0, receiverThread, NULL, 0, NULL);
-	CloseHandle (recvThread);
-}
-
-void SC_endThreads () {
-	closesocket (sockClient);
-	WSACleanup ();
-}
-
-void SC_sendMessage (char* message) {
-	messageQueue.push (message);
-}
-
-DWORD WINAPI receiverThread (LPVOID lpParameter) {
-	while (1) {
-		char content[BUFFER_LEN];
-		*content = 0;
-		recv (sockClient, content, BUFFER_LEN, 0);
-		if (*content && SC_onReceive) {
-			(*SC_onReceive) (content);
-		}
-	}
-}
-
-DWORD WINAPI senderThread (LPVOID lpParameter) {
-	while (1) {
-		if (messageQueue.size () > 0) {
-			send (sockClient, messageQueue.front (), strlen (messageQueue.front ()), 0);
-			send (sockClient, "\n", 1, 0);
-			messageQueue.pop ();
-		}
-	}
-}
+#endif

@@ -5,7 +5,7 @@
 #include "Draw.h"
 #include "CreatDlg.h"
 #include "afxdialogex.h"
-
+#include "SocketClient.h"
 
 // CCreatDlg 对话框
 
@@ -58,6 +58,7 @@ BOOL CCreatDlg::OnInitDialog()
 
 void CCreatDlg::OnBnClickedReturn1Button()
 {
+
 	OnOK();
 	// TODO:  在此添加控件通知处理程序代码
 }
