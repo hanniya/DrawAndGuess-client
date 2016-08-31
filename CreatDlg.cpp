@@ -5,7 +5,7 @@
 #include "Draw.h"
 #include "CreatDlg.h"
 #include "afxdialogex.h"
-#include"SocketClient.h"
+#include "SocketClient.h"
 
 // CCreatDlg ¶Ô»°¿ò
 
