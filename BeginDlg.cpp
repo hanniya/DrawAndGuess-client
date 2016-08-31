@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "CreatDlg.h"
 #include "JoinDlg.h"
+#include "SocketClient.h"
 
 
 // CBeginDlg 对话框
@@ -50,6 +51,7 @@ void CBeginDlg::OnBnClickedCreatButton()
 {
 	CCreatDlg creat;
 	creat.DoModal();
+	SC_beginThreads();
 }
 
 
@@ -57,5 +59,6 @@ void CBeginDlg::OnBnClickedJoinRoom()
 {
 	CJoinDlg join;
 	join.DoModal();
+	SC_beginThreads();
 	// TODO:  在此添加控件通知处理程序代码
 }
