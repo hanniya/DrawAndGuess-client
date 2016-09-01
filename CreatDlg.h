@@ -29,4 +29,6 @@ public:
 	afx_msg void OnBnClickedReturn1Button();
 //	CStatic m_RoomText;
 	afx_msg void OnBnClickedNextButton();
+	afx_msg void OnStnClickedIdText();
+	CString m_Name;
 };

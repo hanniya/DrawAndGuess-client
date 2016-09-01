@@ -53,7 +53,9 @@ void SC_endThreads () {
 }
 
 void SC_sendMessage (char* message) {
-	messageQueue.push (message);
+	char* cpy = new char[strlen(message) + 1];
+	strcpy_s(cpy, strlen(message)+1, message);
+	messageQueue.push (cpy);
 }
 
 DWORD WINAPI receiverThread (LPVOID lpParameter) {
@@ -72,6 +74,7 @@ DWORD WINAPI senderThread (LPVOID lpParameter) {
 		if (messageQueue.size () > 0) {
 			send (sockClient, messageQueue.front (), strlen (messageQueue.front ()), 0);
 			send (sockClient, "\n", 1, 0);
+			delete[] messageQueue.front();
 			messageQueue.pop ();
 		}
 	}
