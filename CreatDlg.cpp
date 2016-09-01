@@ -45,11 +45,11 @@ END_MESSAGE_MAP()
 BOOL CCreatDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+	SC_onReceive = OnRecieveMessage;
 
 	//m_Font.CreatePointFont(110, (LPCTSTR)"Arial", NULL);
 	//m_IdText.SetFont(&m_Font, true);
 	//m_IdText.SetWindowText((LPCTSTR)"Enter Your Name");
-
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -63,7 +63,7 @@ void CCreatDlg::OnBnClickedReturn1Button()
 	// TODO:  在此添加控件通知处理程序代码
 }
 
-void CCreatDlg::OnRecieveMessage(char* ch)
+ void CCreatDlg::OnRecieveMessage(char* ch)
 {
 	Json::Reader reader;
 	Json::Value root;
