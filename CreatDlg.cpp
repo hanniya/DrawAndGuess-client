@@ -87,6 +87,8 @@ void CCreatDlg::OnRecieveMessage(char* ch)
 
 void CCreatDlg::OnBnClickedNextButton()
 {
+	WaitDlg wait;
+	wait.DoModal();
 	UpdateData(TRUE);
 	CString userName = "{\"method\": \"create_room\", \"nick\": \"";
 	userName = userName + m_Name + "\"}";
