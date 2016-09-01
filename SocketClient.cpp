@@ -6,10 +6,10 @@ using namespace std;
 #include "SocketClient.h"
 
 queue<char*> messageQueue;
-
+  
 SOCKET sockClient;
 bool looping = false;
-
+  
 DWORD WINAPI receiverThread (LPVOID lpParameter);
 DWORD WINAPI senderThread (LPVOID lpParameter);
 
