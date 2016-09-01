@@ -22,11 +22,15 @@ protected:
 public:
 	afx_msg void OnBnClickedReturnButton();
 	CStatic m_RoomText;
-	CEdit m_RoomEdit;
+//	CEdit m_RoomEdit;
 	CStatic m_IdText;
-	CEdit m_IdEdit;
+//	CEdit m_IdEdit;
 	virtual BOOL OnInitDialog();
 
 private:
 	CFont m_Font;
+public:
+	CString m_join_name;
+	CString m_room_number;
+	afx_msg void OnBnClickedNextButton();
 };
