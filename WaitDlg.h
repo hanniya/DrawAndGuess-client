@@ -19,5 +19,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	afx_msg void OnBnClickedExitButton();
+	afx_msg void OnBnClickedBeginButton();
+public:
 	int m_room_number;
 };

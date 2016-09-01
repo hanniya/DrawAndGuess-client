@@ -22,6 +22,8 @@ protected:
 public:
 	CStatic m_IdText;
 
+
+
 private:
 	CFont m_Font;
 public:
