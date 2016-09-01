@@ -50,13 +50,13 @@ BOOL CJoinDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	m_Font.CreatePointFont(110, (LPCTSTR)"Arial", NULL);
-	m_IdText.SetFont(&m_Font, true);
-	m_IdText.SetWindowText((LPCTSTR)"Enter Your Name");
+	//m_Font.CreatePointFont(110, (LPCTSTR)"Arial", NULL);
+	//m_IdText.SetFont(&m_Font, true);
+	//m_IdText.SetWindowText((LPCTSTR)"Enter Your Name");
 
 
-	m_RoomText.SetFont(&m_Font, true);
-	m_RoomText.SetWindowText((LPCTSTR)"Your  RoomID  is");
+	//m_RoomText.SetFont(&m_Font, true);
+	//m_RoomText.SetWindowText((LPCTSTR)"Your  RoomID  is");
 	// TODO:  在此添加额外的初始化
 
 	return TRUE;  // return TRUE unless you set the focus to a control
