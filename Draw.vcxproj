@@ -105,6 +105,8 @@
     <ClInclude Include="Draw.h" />
     <ClInclude Include="DrawDlg.h" />
     <ClInclude Include="JoinDlg.h" />
+    <ClInclude Include="json\json-forwards.h" />
+    <ClInclude Include="json\json.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="stdafx.h" />
@@ -118,6 +120,7 @@
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="DrawDlg.cpp" />
     <ClCompile Include="JoinDlg.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="SocketClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -137,9 +140,6 @@
     <Image Include="res\delete.ico" />
     <Image Include="res\Draw.ico" />
     <Image Include="res\return.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="json_vc71_libmtd.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

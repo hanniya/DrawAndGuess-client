@@ -51,6 +51,12 @@
     <ClInclude Include="WaitDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json-forwards.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Draw.cpp">
@@ -77,6 +83,9 @@
     <ClCompile Include="WaitDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Draw.rc">
@@ -98,8 +107,5 @@
     <Image Include="res\return.ico">
       <Filter>资源文件</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="json_vc71_libmtd.lib" />
   </ItemGroup>
 </Project>
