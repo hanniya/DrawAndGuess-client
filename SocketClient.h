@@ -1,6 +1,7 @@
 #ifndef _SOCKET_CLIENT_H_
 #define _SOCKET_CLIENT_H_
 #pragma comment(lib, "WS2_32.lib")
+
 /**
  * SocketClient | Socket 双工长连接
  * 使用两个单独的线程分别监听消息发送队列和查收服务器消息，以便

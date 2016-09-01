@@ -33,4 +33,5 @@ public:
 	afx_msg void OnBnClickedNextButton();
 	afx_msg void OnStnClickedIdText();
 	CString m_Name;
+	void OnRecieveMessage(char *);
 };

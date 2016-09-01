@@ -1,12 +1,13 @@
 // CreatDlg.cpp : 实现文件
 //
-
 #include "stdafx.h"
 #include "Draw.h"
 #include "CreatDlg.h"
 #include "afxdialogex.h"
 #include "SocketClient.h"
 #include "WaitDlg.h"
+#include "json\json.h"
+
 
 // CCreatDlg 对话框
 
@@ -21,6 +22,8 @@ CCreatDlg::CCreatDlg(CWnd* pParent /*=NULL*/)
 CCreatDlg::~CCreatDlg()
 {
 }
+
+
 
 void CCreatDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -55,17 +58,39 @@ BOOL CCreatDlg::OnInitDialog()
 
 void CCreatDlg::OnBnClickedReturn1Button()
 {
-
+	SC_endThreads();
 	OnOK();
 	// TODO:  在此添加控件通知处理程序代码
+}
+
+void CCreatDlg::OnRecieveMessage(char* ch)
+{
+	Json::Reader reader;
+	Json::Value root;
+	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	{
+		bool success = root["success"].asBool();  // 访问节点
+		if (success)
+		{
+			int room = root["room"].asInt();
+			WaitDlg wait;
+			wait.m_room_number = room;
+			wait.DoModal();
+		}
+		else
+		{
+			MessageBoxW(NULL, (LPCWSTR)"服务器未响应", (LPCWSTR)"错误", MB_OK);
+		}
+	}
 }
 
 
 void CCreatDlg::OnBnClickedNextButton()
 {
-	WaitDlg wait;
-	wait.DoModal();
-
-
+	UpdateData(TRUE);
+	CString userName = "{\"method\": \"create_room\", \"nick\": \"";
+	userName = userName + m_Name + "\"}";
+	char * ch = (LPSTR)(LPCTSTR)userName;
+	SC_sendMessage(ch);
 	// TODO:  在此添加控件通知处理程序代码
 }
