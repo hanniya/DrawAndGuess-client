@@ -50,4 +50,5 @@ public:
 	afx_msg void OnBnClickedSendButton();
 	CButton m_ReturnButton;
 	CButton m_DeleteButton;
+	afx_msg void OnBnClickedExitButton();
 };

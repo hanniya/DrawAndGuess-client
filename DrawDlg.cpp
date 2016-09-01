@@ -80,6 +80,7 @@ BEGIN_MESSAGE_MAP(CDrawDlg, CDialogEx)
 	ON_WM_LBUTTONUP()
 	ON_BN_CLICKED(IDC_SEND_BUTTON, &CDrawDlg::OnBnClickedSendButton)
 
+	ON_BN_CLICKED(IDC_EXIT_BUTTON, &CDrawDlg::OnBnClickedExitButton)
 END_MESSAGE_MAP()
 
 
@@ -251,7 +252,6 @@ void CDrawDlg::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	isleftdown = false;
 	// TODO:  在此添加消息处理程序代码和/或调用默认值
-
 	CDialogEx::OnLButtonUp(nFlags, point);
 }
 
@@ -263,3 +263,10 @@ void CDrawDlg::OnBnClickedSendButton()
 
 
 
+
+
+void CDrawDlg::OnBnClickedExitButton()
+{
+	OnOK();
+	// TODO:  在此添加控件通知处理程序代码
+}
