@@ -32,7 +32,7 @@ void WaitDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(WaitDlg, CDialog)
 	ON_BN_CLICKED(IDC_EXIT_BUTTON, &WaitDlg::OnBnClickedExitButton)
-	ON_BN_CLICKED(IDC_BEGIN_BUTTON, &WaitDlg::OnBnClickedBeginButton)
+	//ON_BN_CLICKED(IDC_BEGIN_BUTTON, &WaitDlg::OnBnClickedBeginButton)
 END_MESSAGE_MAP()
 
 
@@ -46,9 +46,9 @@ void WaitDlg::OnBnClickedExitButton()
 }
 
    
-void WaitDlg::OnBnClickedBeginButton()
+/*void WaitDlg::OnBnClickedBeginButton()
 {
 	CDrawDlg draw;
 	draw.DoModal();
 	// TODO:  在此添加控件通知处理程序代码
-}
+}*/
