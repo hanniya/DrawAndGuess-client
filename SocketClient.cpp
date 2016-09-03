@@ -12,6 +12,8 @@ vector<SocketContext*> contexts;
 SOCKET sockClient;
 bool looping = false;
 
+queue<Callback> callbackQueue;
+
 DWORD WINAPI receiverThread (LPVOID lpParameter);
 DWORD WINAPI senderThread (LPVOID lpParameter);
 
@@ -79,8 +81,21 @@ DWORD WINAPI receiverThread (LPVOID lpParameter) {
 		*content = 0;
 		recv (sockClient, content, BUFFER_LEN, 0);
 		if (*content) {
+#ifdef _DEBUG
+			OutputDebugString (content);
+			OutputDebugString ("\n");
+#endif
 			for (SocketContext* context : contexts) {
-				context->handleMessage (content);
+				char* message = new char[strlen (content) + 1];
+				strcpy_s (message, strlen (content) + 1, content);
+
+				Callback callback;
+				callback.message = message;
+				callback.context = context;
+				callbackQueue.push (callback);
+
+				HANDLE callbackThread = CreateThread (NULL, 0, dynamicCallbackThread, NULL, 0, NULL);
+				CloseHandle (callbackThread);
 			}
 		}
 	}
@@ -95,4 +110,13 @@ DWORD WINAPI senderThread (LPVOID lpParameter) {
 			messageQueue.pop ();
 		}
 	}
+}
+
+DWORD WINAPI dynamicCallbackThread (LPVOID lpParameter) {
+	Callback callback = callbackQueue.front ();
+	callbackQueue.pop ();
+
+	callback.context->handleMessage (callback.message);
+
+	return 0;
 }

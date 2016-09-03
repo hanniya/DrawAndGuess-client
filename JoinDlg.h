@@ -1,10 +1,10 @@
 #pragma once
 #include "afxwin.h"
-
+#include "SocketContext.h"
 
 // CJoinDlg ¶Ô»°¿ò
 
-class CJoinDlg : public CDialog
+class CJoinDlg : public CDialog, private SocketContext
 {
 	DECLARE_DYNAMIC(CJoinDlg)
 
@@ -33,4 +33,5 @@ public:
 	CString m_join_name;
 	CString m_room_number;
 	afx_msg void OnBnClickedNextButton();
+    void handleMessage(char *);
 };

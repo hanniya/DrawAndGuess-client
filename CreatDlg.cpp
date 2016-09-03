@@ -7,6 +7,7 @@
 #include "SocketClient.h"
 #include "WaitDlg.h"
 #include "json\json.h"
+#include "BeginDlg.h"
 
 
 // CCreatDlg 对话框
@@ -15,8 +16,8 @@ IMPLEMENT_DYNAMIC(CCreatDlg, CDialog)
 
 CCreatDlg::CCreatDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CCreatDlg::IDD, pParent)
+	, m_Name(_T(""))
 {
-
 }
 
 CCreatDlg::~CCreatDlg()
@@ -24,18 +25,17 @@ CCreatDlg::~CCreatDlg()
 }
 
 
-
 void CCreatDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_ID_TEXT, m_IdText);
-//	DDX_Control(pDX, IDC_ROOM_TEXT, m_RoomText);
+	DDX_Text(pDX, IDC_EDIT1, m_Name);
 }
 
 
 BEGIN_MESSAGE_MAP(CCreatDlg, CDialog)
 	ON_BN_CLICKED(IDC_RETURN1_BUTTON, &CCreatDlg::OnBnClickedReturn1Button)
-	ON_BN_CLICKED(IDC_NEXT_BUTTON, &CCreatDlg::OnBnClickedNextButton)
+	ON_BN_CLICKED(IDC_CREAT_NEXT_BUTTON, &CCreatDlg::OnBnClickedNextButton)
 END_MESSAGE_MAP()
 
 
@@ -65,21 +65,23 @@ void CCreatDlg::OnBnClickedReturn1Button()
 
 void CCreatDlg::handleMessage(char* ch)
 {
-	Json::Reader reader;
-	Json::Value root;
-	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	Json::Reader reader1;
+	Json::Value root1;
+	if (reader1.parse(ch, root1))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		bool success = root["success"].asBool();  // 访问节点
+		bool success = root1["success"].asBool();  // 访问节点
 		if (success)
 		{
-			int room = root["room"].asInt();
+			int room = root1["room"].asInt();
 			WaitDlg wait;
 			wait.m_room_number = room;
+			wait.m_play1 = m_Name;
 			wait.DoModal();
 		}
 		else
 		{
-			MessageBoxW(NULL, (LPCWSTR)"服务器未响应", (LPCWSTR)"错误", MB_OK);
+			CString reason = root1["reason"].asString().c_str();
+
 		}
 	}
 }

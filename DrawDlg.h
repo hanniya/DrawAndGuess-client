@@ -4,6 +4,7 @@
 
 #pragma once
 #include "afxwin.h"
+#include "SocketContext.h"
 
 
 // CDrawDlg ¶Ô»°¿ò
@@ -23,7 +24,6 @@ public:
 	CBrush   m_brush;
 	COLORREF   m_color;
 	CPoint last;
-	bool isleftdown;
 	CDC *pdc; //»­°å
 
 
@@ -40,8 +40,6 @@ protected:
 public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	CString m_MessageEdit;
 	CString m_SendEdit;
 	CButton m_SendButton;
@@ -51,4 +49,5 @@ public:
 	CButton m_ReturnButton;
 	CButton m_DeleteButton;
 	afx_msg void OnBnClickedExitButton();
+	CString m_word;
 };
