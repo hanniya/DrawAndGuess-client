@@ -64,7 +64,7 @@ void WaitDlg::OnBnClickedExitButton()
    
 
 void WaitDlg::OnClickedBeginButton()
-{	
+{
 	char begin[] = "{\"method\": \"start_game\"}";
 	SC_sendMessage(begin);
 	// TODO:  在此添加控件通知处理程序代码
@@ -82,9 +82,9 @@ void WaitDlg::handleMessage(char *ch)
 		if (event == "generate_word")
 		{
 			CString word = root["word"].asString().c_str();
-			CDrawDlg draw;
+	CDrawDlg draw;
 			draw.m_word = word;
-			draw.DoModal();
+	draw.DoModal();
 		}
 		if (!success)
 		{
@@ -99,7 +99,11 @@ void WaitDlg::handleMessage(char *ch)
 BOOL WaitDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+	SkinH_Attach();
+	UpdateData(true);
 	// TODO:  在此添加额外的初始化
+
+
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE

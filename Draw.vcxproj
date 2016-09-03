@@ -109,6 +109,7 @@
     <ClInclude Include="json\json-forwards.h" />
     <ClInclude Include="json\json.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SkinH.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="SocketContext.h" />
     <ClInclude Include="stdafx.h" />
@@ -145,6 +146,9 @@
     <Image Include="res\delete.ico" />
     <Image Include="res\Draw.ico" />
     <Image Include="res\return.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="SkinH.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

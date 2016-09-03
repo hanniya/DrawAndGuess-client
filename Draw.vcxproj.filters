@@ -57,6 +57,9 @@
     <ClInclude Include="json\json-forwards.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SkinH.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="SocketContext.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -113,5 +116,8 @@
     <Image Include="res\return.ico">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="SkinH.lib" />
   </ItemGroup>
 </Project>

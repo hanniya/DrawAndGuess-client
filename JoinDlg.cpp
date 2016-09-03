@@ -66,6 +66,7 @@ BOOL CJoinDlg::OnInitDialog()
 	m_RoomText.SetWindowText("Your  RoomID  is");*/
 	// TODO:  在此添加额外的初始化
 
+	SkinH_Attach();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }
@@ -103,8 +104,10 @@ void CJoinDlg::handleMessage(char*ch)
 void CJoinDlg::OnBnClickedNextButton()
 {
 	// TODO:  在此添加控件通知处理程序代码
-	UpdateData(TRUE);
+	WaitDlg wait;
+	wait.DoModal();
+	PULL;
 	CString str = "{\"method\": \"join_room\", \"room\": ";
 	str = str + m_room_number + ", \"nick\": \"" + m_join_name + "\"}";
-	SC_sendMessage((LPSTR)(LPCTSTR)str);
+	SC_sendMessage((LPSTR)(LPCTSTR)str);	
 }
