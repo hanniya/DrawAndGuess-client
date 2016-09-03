@@ -44,6 +44,8 @@
 
 
 
+#define PULL UpdateData(TRUE)
+#define PUSH UpdateData(FALSE)
 
 #ifdef _UNICODE
 #if defined _M_IX86

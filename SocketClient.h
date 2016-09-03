@@ -24,7 +24,10 @@
 #include <queue>
 using namespace std;
 
+#include "SocketContext.h"
+
 extern queue<char*> messageQueue;
+extern vector<SocketContext*> contexts;
 
 // 消息最大长度设置
 #define BUFFER_LEN 1024
@@ -39,7 +42,9 @@ extern bool looping;
 extern DWORD WINAPI receiverThread (LPVOID lpParameter);
 extern DWORD WINAPI senderThread (LPVOID lpParameter);
 
-extern void (*SC_onReceive)(char*);//每个对话框开始时赋予函数，结束前赋予NULL
+extern void SC_registerContext (SocketContext*);
+extern void SC_unregisterContext (SocketContext*);
+
 extern void SC_beginThreads ();
 extern void SC_endThreads ();
 extern void SC_sendMessage (char* message);
