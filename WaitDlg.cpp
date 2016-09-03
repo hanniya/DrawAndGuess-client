@@ -76,17 +76,27 @@ void WaitDlg::handleMessage(char *ch)
 	Json::Value root3;
 	if (reader3.parse(ch, root3))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		CString event = root3["event"].asCString();
+		CString event = root3["event"].asString().c_str();
 		if (event == "generate_word")
 		{
-			CString word = root3["word"].asCString();
+			CString word = root3["word"].asString().c_str();
 			CDrawDlg draw;
 			draw.m_word = word;
 			draw.DoModal();
 		}
-		else
+		if (event == "user_join")
 		{
-			AfxMessageBox(ch);
+			CString nick = root3["nick"].asString().c_str();
+			CString players[6] = { m_play1, m_play2, m_play3, m_play4, m_play5, m_play6 };
+			for (int i = 0; i < 6; i++)
+			{
+				if (players[i] == "")
+				{
+					players[i] = nick;
+					break;
+				}
+			}
+			PULL;
 		}
 	}
 }
