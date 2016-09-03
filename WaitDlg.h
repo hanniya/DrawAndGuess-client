@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // WaitDlg ¶Ô»°¿ò
@@ -22,8 +23,16 @@ public:
 	afx_msg void OnBnClickedExitButton();
 	afx_msg void OnBnClickedBeginButton();
 public:
-//	int m_room_number;
 	afx_msg void OnClickedBeginButton();
 	virtual BOOL OnInitDialog();
 	int m_room_number;
+	CString m_play1;
+	CString m_play2;
+	CString m_play3;
+	CString m_play4;
+	CString m_play5;
+	CString m_play6;
+	static void OnReceiveMessage(char*);
+	static CString word;
+	CButton m_btn;
 };

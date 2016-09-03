@@ -8,6 +8,7 @@
 #include "afxdialogex.h"
 #include "Utils.h"
 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -54,6 +55,7 @@ CDrawDlg::CDrawDlg(CWnd* pParent /*=NULL*/)
 	, m_SendEdit(_T(""))
 	, m_PlayerMes(_T(""))
 	, m_TimeWord(_T(""))
+	, m_word(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -68,6 +70,7 @@ void CDrawDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_TIMEWORD_EDIT, m_TimeWord);
 	DDX_Control(pDX, IDC_RETURN_BUTTON, m_ReturnButton);
 	DDX_Control(pDX, IDC_DELETE_BUTTON, m_DeleteButton);
+	DDX_Text(pDX, IDC_WORD_EDIT, m_word);
 }
 
 BEGIN_MESSAGE_MAP(CDrawDlg, CDialogEx)

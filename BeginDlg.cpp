@@ -40,6 +40,7 @@ END_MESSAGE_MAP()
 // CBeginDlg 消息处理程序
 
 
+
 void CBeginDlg::OnBnClickedExitButton()
 {
 	OnOK();
@@ -50,8 +51,8 @@ void CBeginDlg::OnBnClickedExitButton()
 void CBeginDlg::OnBnClickedCreatButton()
 {	
 	SC_beginThreads();
-	CCreatDlg creat;
-	creat.DoModal();
+	CCreatDlg create;
+	create.DoModal();
 }
 
 
@@ -68,8 +69,6 @@ void CBeginDlg::OnBnClickedJoinRoom()
 BOOL CBeginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-
-
 
 	// TODO:  在此添加额外的初始化
 

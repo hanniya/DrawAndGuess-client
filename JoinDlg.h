@@ -33,4 +33,8 @@ public:
 	CString m_join_name;
 	CString m_room_number;
 	afx_msg void OnBnClickedNextButton();
+	static void OnRecieveMessage(char *);
+	static bool success;
+	static string players[6];
+	static int NumberOfPlayers;
 };

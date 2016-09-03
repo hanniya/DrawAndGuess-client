@@ -23,7 +23,6 @@ public:
 	afx_msg void OnBnClickedCreatButton();
 	afx_msg void OnBnClickedJoinRoom();
 	virtual BOOL OnInitDialog();
-
 private:
 	CFont m_Font;
 };

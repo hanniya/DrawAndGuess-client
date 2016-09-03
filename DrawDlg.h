@@ -51,4 +51,5 @@ public:
 	CButton m_ReturnButton;
 	CButton m_DeleteButton;
 	afx_msg void OnBnClickedExitButton();
+	CString m_word;
 };
