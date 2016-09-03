@@ -115,6 +115,8 @@ BOOL CDrawDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
+	SkinH_Attach();
+
 	m_brush.CreateSolidBrush(RGB(255, 255, 255));//设置白色背景
 	isleftdown = false;//初始化鼠标左键松开
 
@@ -135,7 +137,7 @@ BOOL CDrawDlg::OnInitDialog()
 	m_DeleteButton.SetIcon(hIcon2);
 
 
-	SkinH_Attach();
+
 	// TODO:  在此添加额外的初始化代码
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
