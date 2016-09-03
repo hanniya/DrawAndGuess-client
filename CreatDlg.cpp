@@ -65,14 +65,14 @@ void CCreatDlg::OnBnClickedReturn1Button()
 
 void CCreatDlg::handleMessage(char* ch)
 {
-	Json::Reader reader;
-	Json::Value root;
-	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	Json::Reader reader1;
+	Json::Value root1;
+	if (reader1.parse(ch, root1))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		bool success = root["success"].asBool();  // 访问节点
+		bool success = root1["success"].asBool();  // 访问节点
 		if (success)
 		{
-			int room = root["room"].asInt();
+			int room = root1["room"].asInt();
 			WaitDlg wait;
 			wait.m_room_number = room;
 			wait.m_play1 = m_Name;
@@ -80,8 +80,8 @@ void CCreatDlg::handleMessage(char* ch)
 		}
 		else
 		{
-			CString reason = root["reason"].asCString();
-			AfxMessageBox(reason);
+			CString reason = root1["reason"].asString().c_str();
+
 		}
 	}
 }

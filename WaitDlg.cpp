@@ -16,14 +16,14 @@ using namespace std;
 IMPLEMENT_DYNAMIC(WaitDlg, CDialog)
 
 WaitDlg::WaitDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(WaitDlg::IDD, pParent)
-	, m_room_number(0)
-	, m_play1(_T(""))
-	, m_play2(_T(""))
-	, m_play3(_T(""))
-	, m_play4(_T(""))
-	, m_play5(_T(""))
-	, m_play6(_T(""))
+: CDialog(WaitDlg::IDD, pParent)
+, m_room_number(0)
+, m_play1(_T(""))
+, m_play2(_T(""))
+, m_play3(_T(""))
+, m_play4(_T(""))
+, m_play5(_T(""))
+, m_play6(_T(""))
 {
 }
 
@@ -61,7 +61,7 @@ void WaitDlg::OnBnClickedExitButton()
 	// TODO:  在此添加控件通知处理程序代码
 }
 
-   
+
 
 void WaitDlg::OnClickedBeginButton()
 {
@@ -72,24 +72,21 @@ void WaitDlg::OnClickedBeginButton()
 
 void WaitDlg::handleMessage(char *ch)
 {
-	Json::Reader reader;
-	Json::Value root;
-	AfxMessageBox(ch);
-	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	Json::Reader reader3;
+	Json::Value root3;
+	if (reader3.parse(ch, root3))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		string event = root["event"].asString();
-		bool success = root["success"].asBool();
+		CString event = root3["event"].asCString();
 		if (event == "generate_word")
 		{
-			CString word = root["word"].asString().c_str();
-	CDrawDlg draw;
+			CString word = root3["word"].asCString();
+			CDrawDlg draw;
 			draw.m_word = word;
-	draw.DoModal();
+			draw.DoModal();
 		}
-		if (!success)
+		else
 		{
-			CString reason = root["reason"].asCString();
-			AfxMessageBox(reason);
+			AfxMessageBox(ch);
 		}
 	}
 }

@@ -73,22 +73,28 @@ BOOL CJoinDlg::OnInitDialog()
 
 void CJoinDlg::handleMessage(char*ch)
 {
-	Json::Reader reader;
-	Json::Value root;
-	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
+	Json::Reader reader2;
+	Json::Value root2;
+	if (reader2.parse(ch, root2))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		CString event = root["event"].asCString();
+		bool success = root2["success"].asBool();  // 访问节点
+		CString event = root2["event"].asString().c_str();
 		if (event == "user_join")  return;
-		bool success = root["success"].asBool();  // 访问节点
-		AfxMessageBox(ch);
 		if (success)
 		{
 			WaitDlg wait;
+			if (root2["players"][0].asString() != "")    wait.m_play1 = root2["players"][0].asString().c_str();
+			if (root2["players"][1].asString() != "")    wait.m_play2 = root2["players"][1].asString().c_str();
+			if (root2["players"][2].asString() != "")    wait.m_play3 = root2["players"][2].asString().c_str();
+			if (root2["players"][3].asString() != "")    wait.m_play4 = root2["players"][3].asString().c_str();
+			if (root2["players"][4].asString() != "")    wait.m_play5 = root2["players"][4].asString().c_str();
+			if (root2["players"][5].asString() != "")    wait.m_play6 = root2["players"][5].asString().c_str();
+			wait.m_room_number = atoi(m_room_number);
 			wait.DoModal();
 		}
 		else
 		{
-			CString reason = root["reason"].asCString();
+			CString reason = root2["reason"].asString().c_str();
 			AfxMessageBox(ch);
 		}
 	}
@@ -98,8 +104,6 @@ void CJoinDlg::handleMessage(char*ch)
 void CJoinDlg::OnBnClickedNextButton()
 {
 	// TODO:  在此添加控件通知处理程序代码
-	WaitDlg wait;
-	wait.DoModal();
 	PULL;
 	CString str = "{\"method\": \"join_room\", \"room\": ";
 	str = str + m_room_number + ", \"nick\": \"" + m_join_name + "\"}";
