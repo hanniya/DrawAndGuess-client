@@ -39,8 +39,16 @@ extern vector<SocketContext*> contexts;
 extern SOCKET sockClient;
 extern bool looping;
 
+struct Callback {
+	char* message;
+	SocketContext* context;
+};
+
+extern queue<Callback> callbackQueue;
+
 extern DWORD WINAPI receiverThread (LPVOID lpParameter);
 extern DWORD WINAPI senderThread (LPVOID lpParameter);
+extern DWORD WINAPI dynamicCallbackThread (LPVOID lpParameter);
 
 extern void SC_registerContext (SocketContext*);
 extern void SC_unregisterContext (SocketContext*);

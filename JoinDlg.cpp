@@ -84,12 +84,6 @@ void CJoinDlg::handleMessage(char*ch)
 		if (success)
 		{
 			WaitDlg wait;
-			if (root["players"][0].asCString() != "")    wait.m_play1 = root["players"][0].asCString();
-			if (root["players"][1].asCString() != "")    wait.m_play2 = root["players"][1].asCString();
-			if (root["players"][2].asCString() != "")    wait.m_play3 = root["players"][2].asCString();
-			if (root["players"][3].asCString() != "")    wait.m_play4 = root["players"][3].asCString();
-			if (root["players"][4].asCString() != "")    wait.m_play5 = root["players"][4].asCString();
-			if (root["players"][5].asCString() != "")    wait.m_play6 = root["players"][5].asCString();
 			wait.DoModal();
 		}
 		else
