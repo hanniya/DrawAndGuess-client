@@ -86,7 +86,7 @@ void CCreatDlg::handleMessage(char* ch)
 
 void CCreatDlg::OnBnClickedNextButton()
 {
-	UpdateData(TRUE);
+	PULL;
 	CString userName = "{\"method\": \"create_room\", \"nick\": \"";
 	userName = userName + m_Name + "\"}";
 	char * ch = (LPSTR)(LPCTSTR)userName;

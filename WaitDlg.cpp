@@ -60,7 +60,6 @@ void WaitDlg::OnClickedBeginButton()
 BOOL WaitDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	UpdateData(true);
 	// TODO:  在此添加额外的初始化
 
 	return TRUE;  // return TRUE unless you set the focus to a control

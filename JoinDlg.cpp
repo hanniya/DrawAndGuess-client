@@ -76,7 +76,7 @@ void CJoinDlg::OnBnClickedNextButton()
 	// TODO:  在此添加控件通知处理程序代码
 	WaitDlg wait;
 	wait.DoModal();
-	UpdateData(TRUE);
+	PULL;
 	CString str = "{\"method\": \"join_room\", \"room\": ";
 	str = str + m_room_number + ", \"nick\": \"" + m_join_name + "\"}";
 	SC_sendMessage((LPSTR)(LPCTSTR)str);	
