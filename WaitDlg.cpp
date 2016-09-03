@@ -25,7 +25,6 @@ WaitDlg::WaitDlg(CWnd* pParent /*=NULL*/)
 	, m_play5(_T(""))
 	, m_play6(_T(""))
 {
-	SC_onReceive = OnReceiveMessage;
 }
 
 WaitDlg::~WaitDlg()
@@ -54,12 +53,10 @@ END_MESSAGE_MAP()
 
 // WaitDlg 消息处理程序
 
-CString WaitDlg::word = "";
 
 
 void WaitDlg::OnBnClickedExitButton()
 {
-	SC_onReceive = NULL;
 	OnOK();
 	// TODO:  在此添加控件通知处理程序代码
 }
@@ -70,23 +67,29 @@ void WaitDlg::OnClickedBeginButton()
 {	
 	char begin[] = "{\"method\": \"start_game\"}";
 	SC_sendMessage(begin);
-	AfxMessageBox("即将开始游戏，准备好了吗！");
-	CDrawDlg draw;
-	draw.m_word = word;
-	draw.DoModal();
 	// TODO:  在此添加控件通知处理程序代码
 }
 
-void WaitDlg::OnReceiveMessage(char *ch)
+void WaitDlg::handleMessage(char *ch)
 {
 	Json::Reader reader;
 	Json::Value root;
+	AfxMessageBox(ch);
 	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
 		string event = root["event"].asString();
+		bool success = root["success"].asBool();
 		if (event == "generate_word")
 		{
-			word = root["word"].asString().c_str();
+			CString word = root["word"].asString().c_str();
+			CDrawDlg draw;
+			draw.m_word = word;
+			draw.DoModal();
+		}
+		if (!success)
+		{
+			CString reason = root["reason"].asCString();
+			AfxMessageBox(reason);
 		}
 	}
 }
@@ -96,7 +99,6 @@ void WaitDlg::OnReceiveMessage(char *ch)
 BOOL WaitDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	UpdateData(true);
 	// TODO:  在此添加额外的初始化
 
 	return TRUE;  // return TRUE unless you set the focus to a control

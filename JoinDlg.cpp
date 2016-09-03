@@ -17,16 +17,12 @@ CJoinDlg::CJoinDlg(CWnd* pParent /*=NULL*/)
 	, m_join_name(_T(""))
 	, m_room_number(_T(""))
 {
-	SC_onReceive = OnRecieveMessage;
 }
 
 CJoinDlg::~CJoinDlg()
 {
 }
 
-bool CJoinDlg::success = FALSE;
-string players[6] = {};
-int NumberOfPlayers = 0;
 
 void CJoinDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -52,7 +48,6 @@ END_MESSAGE_MAP()
 void CJoinDlg::OnBnClickedReturnButton()
 {
 	SC_endThreads();
-	SC_onReceive = NULL;
 	OnOK();
 	// TODO:  在此添加控件通知处理程序代码
 }
@@ -75,24 +70,31 @@ BOOL CJoinDlg::OnInitDialog()
 	// 异常:  OCX 属性页应返回 FALSE
 }
 
-void CJoinDlg::OnRecieveMessage(char*ch)
+void CJoinDlg::handleMessage(char*ch)
 {
 	Json::Reader reader;
 	Json::Value root;
 	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		success = root["success"].asBool();  // 访问节点
-		for (int i = 0; i < 6; i++)
+		CString event = root["event"].asCString();
+		if (event == "user_join")  return;
+		bool success = root["success"].asBool();  // 访问节点
+		AfxMessageBox(ch);
+		if (success)
 		{
-			if (root["success"][i].asString() != "")
-			{
-				players[i] = root["success"][i].asString();
-				NumberOfPlayers += 1;
-			}
-			else
-			{
-				break;
-			}
+			WaitDlg wait;
+			if (root["players"][0].asCString() != "")    wait.m_play1 = root["players"][0].asCString();
+			if (root["players"][1].asCString() != "")    wait.m_play2 = root["players"][1].asCString();
+			if (root["players"][2].asCString() != "")    wait.m_play3 = root["players"][2].asCString();
+			if (root["players"][3].asCString() != "")    wait.m_play4 = root["players"][3].asCString();
+			if (root["players"][4].asCString() != "")    wait.m_play5 = root["players"][4].asCString();
+			if (root["players"][5].asCString() != "")    wait.m_play6 = root["players"][5].asCString();
+			wait.DoModal();
+		}
+		else
+		{
+			CString reason = root["reason"].asCString();
+			AfxMessageBox(ch);
 		}
 	}
 }
@@ -105,22 +107,4 @@ void CJoinDlg::OnBnClickedNextButton()
 	CString str = "{\"method\": \"join_room\", \"room\": ";
 	str = str + m_room_number + ", \"nick\": \"" + m_join_name + "\"}";
 	SC_sendMessage((LPSTR)(LPCTSTR)str);
-	AfxMessageBox("即将进入房间");
-	if (success)
-	{
-		WaitDlg wait;
-		wait.m_room_number = atoi(m_room_number);
-		int a = 0;
-		if (NumberOfPlayers>a)   wait.m_play1 = players[a].c_str(), a += 1;
-		if (NumberOfPlayers>a)   wait.m_play2 = players[a].c_str(), a += 1;
-		if (NumberOfPlayers>a)   wait.m_play3 = players[a].c_str(), a += 1;
-		if (NumberOfPlayers>a)   wait.m_play4 = players[a].c_str(), a += 1;
-		if (NumberOfPlayers>a)   wait.m_play5 = players[a].c_str(), a += 1;
-		if (NumberOfPlayers>a)   wait.m_play6 = players[a].c_str();
-		wait.DoModal();
-	}
-	else
-	{
-		MessageBoxW(NULL, (LPCWSTR)L"服务器未响应", (LPCWSTR)L"错误", MB_OK);
-	}
 }

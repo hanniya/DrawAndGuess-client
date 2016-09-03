@@ -4,6 +4,7 @@
 
 #pragma once
 #include "afxwin.h"
+#include "SocketContext.h"
 
 
 // CDrawDlg ¶Ô»°¿ò

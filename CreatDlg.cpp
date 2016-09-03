@@ -18,15 +18,12 @@ CCreatDlg::CCreatDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CCreatDlg::IDD, pParent)
 	, m_Name(_T(""))
 {
-	SC_onReceive = OnRecieveMessage;
 }
 
 CCreatDlg::~CCreatDlg()
 {
 }
 
-int CCreatDlg::room = 0;
-bool CCreatDlg::success = FALSE;
 
 void CCreatDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -61,19 +58,30 @@ BOOL CCreatDlg::OnInitDialog()
 void CCreatDlg::OnBnClickedReturn1Button()
 {
 	SC_endThreads();
-	SC_onReceive = NULL;
 	OnOK();
 	// TODO:  在此添加控件通知处理程序代码
 }
 
- void CCreatDlg::OnRecieveMessage(char* ch)
+void CCreatDlg::handleMessage(char* ch)
 {
 	Json::Reader reader;
 	Json::Value root;
 	if (reader.parse(ch, root))  // reader将Json字符串解析到root，root将包含Json里所有子元素  
 	{
-		CCreatDlg::success = root["success"].asBool();  // 访问节点
-		CCreatDlg::room = root["room"].asInt();
+		bool success = root["success"].asBool();  // 访问节点
+		if (success)
+		{
+			int room = root["room"].asInt();
+			WaitDlg wait;
+			wait.m_room_number = room;
+			wait.m_play1 = m_Name;
+			wait.DoModal();
+		}
+		else
+		{
+			CString reason = root["reason"].asCString();
+			AfxMessageBox(reason);
+		}
 	}
 }
 
@@ -85,14 +93,5 @@ void CCreatDlg::OnBnClickedNextButton()
 	userName = userName + m_Name + "\"}";
 	char * ch = (LPSTR)(LPCTSTR)userName;
 	SC_sendMessage(ch);
-	AfxMessageBox("即将创建房间");
-	if (success){
-		WaitDlg wait;
-		wait.m_room_number = room;
-		wait.m_play1 = m_Name;
-		wait.DoModal();
-	}
-	else AfxMessageBox("连接服务器失败");
-
 	// TODO:  在此添加控件通知处理程序代码
 }

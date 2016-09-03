@@ -1,10 +1,11 @@
 #pragma once
 #include "afxwin.h"
+#include "SocketContext.h"
 
 
 // WaitDlg ¶Ô»°¿ò
 
-class WaitDlg : public CDialog
+class WaitDlg : public CDialog,private SocketContext
 {
 	DECLARE_DYNAMIC(WaitDlg)
 
@@ -32,7 +33,6 @@ public:
 	CString m_play4;
 	CString m_play5;
 	CString m_play6;
-	static void OnReceiveMessage(char*);
-	static CString word;
 	CButton m_btn;
+	void handleMessage(char*);
 };

@@ -1,10 +1,11 @@
 #pragma once
 #include "afxwin.h"
+#include "SocketContext.h"
 
 
 // CCreatDlg ¶Ô»°¿ò
 
-class CCreatDlg : public CDialog
+class CCreatDlg : public CDialog, private SocketContext
 {
 	DECLARE_DYNAMIC(CCreatDlg)
 
@@ -27,12 +28,11 @@ public:
 private:
 	CFont m_Font;
 public:
+	void handleMessage (char*);
+
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedReturn1Button();
 	afx_msg void OnBnClickedNextButton();
 	afx_msg void OnStnClickedIdText();
-	static void OnRecieveMessage(char *);
 	CString m_Name;
-	static bool success;
-	static int room;
 };
