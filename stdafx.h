@@ -34,6 +34,10 @@
 #include <afxcontrolbars.h>     // 功能区和控件条的 MFC 支持
 
 
+#include "SkinH.h"
+#pragma comment(lib, "SkinH.lib")
+
+
 
 
 

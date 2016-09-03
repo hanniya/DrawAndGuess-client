@@ -66,6 +66,7 @@ BOOL CJoinDlg::OnInitDialog()
 	m_RoomText.SetWindowText(_T("Your  RoomID  is"));
 	// TODO:  在此添加额外的初始化
 
+	SkinH_Attach();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }

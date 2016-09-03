@@ -45,13 +45,14 @@ BOOL CDrawApp::InitInstance()
 	//则需要 InitCommonControlsEx()。  否则，将无法创建窗口。
 	INITCOMMONCONTROLSEX InitCtrls;
 	InitCtrls.dwSize = sizeof(InitCtrls);
+
+
 	// 将它设置为包括所有要在应用程序中使用的
 	// 公共控件类。
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
-
 
 	AfxEnableControlContainer();
 

@@ -50,6 +50,7 @@ BOOL CCreatDlg::OnInitDialog()
 	//m_Font.CreatePointFont(110, (LPCTSTR)"Arial", NULL);
 	//m_IdText.SetFont(&m_Font, true);
 	//m_IdText.SetWindowText((LPCTSTR)"Enter Your Name");
+	SkinH_Attach();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -87,8 +88,6 @@ void CCreatDlg::OnBnClickedReturn1Button()
 
 void CCreatDlg::OnBnClickedNextButton()
 {
-	WaitDlg wait;
-	wait.DoModal();
 	UpdateData(TRUE);
 	CString userName = "{\"method\": \"create_room\", \"nick\": \"";
 	userName = userName + m_Name + "\"}";
