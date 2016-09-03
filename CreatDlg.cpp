@@ -45,7 +45,6 @@ END_MESSAGE_MAP()
 BOOL CCreatDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	SC_onReceive = OnRecieveMessage;
 
 	//m_Font.CreatePointFont(110, (LPCTSTR)"Arial", NULL);
 	//m_IdText.SetFont(&m_Font, true);
@@ -63,7 +62,7 @@ void CCreatDlg::OnBnClickedReturn1Button()
 	// TODO:  在此添加控件通知处理程序代码
 }
 
- void CCreatDlg::OnRecieveMessage(char* ch)
+void CCreatDlg::handleMessage(char* ch)
 {
 	Json::Reader reader;
 	Json::Value root;

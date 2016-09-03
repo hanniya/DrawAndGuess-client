@@ -4,16 +4,16 @@
 using namespace std;
 
 #include "SocketClient.h"
+#include "SocketContext.h"
 
 queue<char*> messageQueue;
+vector<SocketContext*> contexts;
   
 SOCKET sockClient;
 bool looping = false;
 
 DWORD WINAPI receiverThread (LPVOID lpParameter);
 DWORD WINAPI senderThread (LPVOID lpParameter);
-
-void (*SC_onReceive)(char*) = NULL;
 
 void SC_beginThreads () {
 	WORD wVersionRequested;
@@ -58,13 +58,30 @@ void SC_sendMessage (char* message) {
 	messageQueue.push (cpy);
 }
 
+void SC_registerContext (SocketContext* context) {
+	contexts.push_back (context);
+}
+
+void SC_unregisterContext (SocketContext* context) {
+	vector<SocketContext*>::iterator itr;
+	for (itr = contexts.begin (); itr != contexts.end ();) {
+		if (*itr == context) {
+			itr = contexts.erase (itr);
+		} else {
+			++itr;
+		}
+	}
+}
+
 DWORD WINAPI receiverThread (LPVOID lpParameter) {
 	while (1) {
 		char content[BUFFER_LEN];
 		*content = 0;
 		recv (sockClient, content, BUFFER_LEN, 0);
-		if (*content && SC_onReceive) {
-			(*SC_onReceive) (content);
+		if (*content) {
+			for (SocketContext* context : contexts) {
+				context->handleMessage (content);
+			}
 		}
 	}
 }
